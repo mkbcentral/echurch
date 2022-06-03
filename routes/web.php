@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\HomeController;
 use App\Http\Livewire\Admin\Church\ChurchManagement;
 use App\Http\Livewire\Admin\Church\PreachingManagement;
 use Illuminate\Support\Facades\Route;
@@ -8,6 +9,7 @@ use App\Http\Livewire\Admin\Event\CreateEvent;
 use App\Http\Livewire\Admin\Event\EditEvent;
 use App\Http\Livewire\Admin\Event\EventManagement;
 use App\Http\Livewire\Admin\SettingManagement;
+use App\Http\Livewire\HomePage;
 use App\Http\Livewire\User\UserProfile;
 
 /*
@@ -20,12 +22,11 @@ use App\Http\Livewire\User\UserProfile;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('/', function () {
-    return view('welcome');
+Route::controller(HomeController::class)->group(function(){
+    Route::get('/','index')->name('home');
 });
-
 Route::middleware(['auth'])->group(function () {
+
     Route::get('/dashbaord/main',DashboardManagement::class)
             ->name('admin.dashboard.main');
     Route::get('/admin/church-management',ChurchManagement::class)

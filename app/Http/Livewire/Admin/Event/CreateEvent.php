@@ -44,9 +44,8 @@ class CreateEvent extends Component
     }
 
     public function mount(Church $church){
-        
-    }
 
+    }
     public function render()
     {
         return view('livewire.admin.event.create-event');

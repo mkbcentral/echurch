@@ -27,9 +27,6 @@
         </aside>
         <!-- /.control-sidebar -->
     </div>
-    <!-- ./wrapper -->
-    <!-- jQuery -->
-
     <script src="{{ mix('js/app.js') }}"></script>
     <script src="{{ mix('js/toast.js') }}" defer></script>
     <script src="{{ mix('js/dialog.js') }}" defer></script>
