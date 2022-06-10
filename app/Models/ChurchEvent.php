@@ -20,11 +20,29 @@ class ChurchEvent extends Model
     ];
 
     public function getStartedAtDateAttribute($value){
-        return Carbon::parse($value)->toFormattedDateString();
+        return Carbon::parse($value)->toFormattedDateString('d/m/Y');
     }
     public function getFinishedAtDateAttribute($value){
         return Carbon::parse($value)->toFormattedDateString();
     }
 
-   
+    public function comments(){
+        return $this->hasMany(Comment::class);
+    }
+
+    public function likes(){
+        return $this->hasMany(Like::class);
+    }
+
+    public function isSelfLike($id){
+        $event=ChurchEvent::find($id);
+        $data=$event->likes()->where('user_id',auth()->user()->id)->get();
+        if ($data->isEmpty()) {
+            return false;
+        }else{
+            return true;
+        }
+    }
+
+
 }

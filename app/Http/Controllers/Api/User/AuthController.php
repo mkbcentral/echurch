@@ -14,7 +14,8 @@ class AuthController extends Controller
         $request->validate([
             'name'=>'required',
             'email'=>'required|email',
-            'password'=>'required|min:4',
+            'password'=>'required|min:4|confirmed',
+            'password_confirmation'=>'min:4'
         ]);
 
         $user=User::create([
@@ -39,9 +40,25 @@ class AuthController extends Controller
            ]);
         } else {
             return response()->json([
-                'user'=>'Make sure your email and password'
-           ]);
+                'message'=>'Make sure your email and password'
+           ],403);
         }
 
+    }
+
+    public function updateProfile(Request $request,$id){
+        $user=User::find($id);
+        $image=$this->saveImage($request->avatar,'avatars');
+        $user->avatar=$image;
+        $user->update();
+        return response()->json([
+            'Profile'=>$image
+       ],200);
+    }
+    public function user(){
+        return response()->json([
+            'user'=>auth()->user(),
+            'token'=>request()->bearerToken()
+        ]);
     }
 }

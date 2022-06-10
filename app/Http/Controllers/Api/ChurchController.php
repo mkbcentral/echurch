@@ -16,7 +16,7 @@ class ChurchController extends Controller
 
             ]
         );
-        $churches=Church::paginate($request->input('per_page',5));
+        $churches=Church::paginate($request->input('per_page',10));
         return ChurchResource::collection($churches);
     }
 }

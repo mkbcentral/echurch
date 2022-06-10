@@ -15,6 +15,7 @@ class ChurchResource extends JsonResource
     public function toArray($request)
     {
         return [
+            'id'=>$this->id,
             'name'=>$this->name,
             'abreviation'=>$this->abreviation,
             'pastor_name'=>$this->pastor_name,
@@ -22,6 +23,9 @@ class ChurchResource extends JsonResource
             'phone'=>$this->phone,
             'logo_url'=>config('app.url').'/storage/'. $this->logo_url,
             'status'=>$this->status,
+            'country'=>$this->country==null?"":$this->country->name,
+            'province'=>$this->province==null?"":$this->province->name,
+            'ctity'=>$this->ctity==null?"":$this->ctity->name,
         ];
     }
 }
